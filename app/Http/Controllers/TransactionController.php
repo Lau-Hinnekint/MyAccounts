@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
-use DateTime;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Category;
 
 class TransactionController extends Controller
 {
@@ -33,8 +33,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-   
-        return view ('transactionAdd');
+        return view ('transactionAdd', ['categories' => Category::all()]);
     }
 
     /**
@@ -45,15 +44,16 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-
-        // $date = new DateTime($request->input('date'));
-
-        $transaction = new Transaction;
+        $transaction=new Transaction;
         // $transaction->name = $request->name;
-        $transaction -> name = $request->input('name');
-        $transaction -> date_transaction = $request->input('date');
-        $transaction -> amount = $request->input('amount');
-        $transaction -> save();
+        $transaction->name = $request->input('name');
+        $transaction->date_transaction = $request->input('date');
+        $transaction->amount = $request->input('amount');
+        
+        $category=Category::find($request->input('category'));
+        $category->transactions()->save($transaction);
+        
+        $transaction->save();
 
         return Redirect::route('transactionList') -> with ('success' , 'Transaction enregistré avec succès'); // Redirect::route('') == HEADER:LOCATION 
     }

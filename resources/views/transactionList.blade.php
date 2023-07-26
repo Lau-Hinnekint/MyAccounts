@@ -34,7 +34,10 @@
                     @endif 
                     @foreach ($transactions as $transaction)
                         <tr>
-                            <td width="50" class="ps-3">
+                            <td width="50" class="ps-3"> 
+                                @isset($transaction->category->icon)
+                                <i class="bi {{ $transaction->category->icon }}"></i>
+                                @endisset
                             </td>
                             <td>
                                 <time datetime="2023-07-10" class="d-block fst-italic fw-light">{{$transaction->date_transaction}}</time>
