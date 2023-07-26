@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ use App\Http\Controllers\TransactionController;
 // });
 
 
-Route::get('/list', [TransactionController::class, 'index'])-> name('transactionList');
-Route::get('/add', [TransactionController::class, 'create'])-> name('transactionAdd');
-Route::post('/add', [TransactionController::class, 'store'])-> name('transactionStore');
+Route::get('trans/list', [TransactionController::class, 'index'])->name('transactionList');
+Route::get('trans/add', [TransactionController::class, 'create'])->name('transactionAdd');
+Route::post('trans/add', [TransactionController::class, 'store'])->name('transactionStore');
+Route::get('cat/list', [CategoryController::class, 'index'])->name('categoryList');
+Route::post('cat/add', [CategoryController::class, 'store'])->name('categoryStore');

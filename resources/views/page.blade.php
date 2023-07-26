@@ -14,19 +14,19 @@
     
 <div class="container-fluid">
     <header class="row flex-wrap justify-content-between align-items-center p-3 mb-4 border-bottom">
-        <a href="index.html" class="col-1">
+        <a href="{{ @route ('transactionList') }}" class="col-1">
             <i class="bi bi-piggy-bank-fill text-primary fs-1"></i>
         </a>
         <nav class="col-11 col-md-7">
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link link-secondary" aria-current="page">Opérations</a>
+                    <a href="{{ @route ('transactionList') }}" class="nav-link link-secondary" aria-current="page">Opérations</a>
                 </li>
                 <li class="nav-item">
                     <a href="summary.html" class="nav-link link-body-emphasis">Synthèses</a>
                 </li>
                 <li class="nav-item">
-                    <a href="categories.html" class="nav-link link-body-emphasis">Catégories</a>
+                    <a href="{{ @route ('categoryList') }}" class="nav-link link-body-emphasis">Catégories</a>
                 </li>
                 <li class="nav-item">
                     <a href="import.html" class="nav-link link-body-emphasis">Importer</a>
@@ -43,8 +43,6 @@
         </form>
     </header>
 </div>
-
-
 
     @section ('body')
     content

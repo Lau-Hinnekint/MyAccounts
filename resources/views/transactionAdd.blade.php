@@ -27,14 +27,14 @@
                 </div>
 
                 <div class="mb-3">
-                        <label for="category" class="form-label">Catégorie</label>
-                        <select class="form-select" name="category" id="category">
-                            <option value="" selected>Aucune catégorie</option>
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach  
-                        </select>
-                    </div>
+                    <label for="category" class="form-label">Catégorie</label>
+                    <select class="form-select" name="category" id="category">
+                        <option value="" selected>Aucune catégorie</option>
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-lg">Ajouter</button>
                 </div>

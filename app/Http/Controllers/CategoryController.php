@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Transaction;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Category;
 
-class TransactionController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +14,11 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $data = [
-            'transactions'=> Transaction::where('date_transaction', 'LIKE', '2023-07%')
-            ->orderByDesc ('date_transaction')
-            ->get(),
-            'total' => Transaction::sum('amount')
+            'categories' => Category::all()
         ]; 
-        
-        return view ('transactionList', $data);
+        return view ('categoryList', $data);
     }
 
     /**
@@ -33,7 +28,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        return view ('transactionAdd', ['categories' => Category::all()]);
+        return view ('categoryAdd');
     }
 
     /**
@@ -44,18 +39,14 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $transaction=new Transaction;
-        // $transaction->name = $request->name;
-        $transaction->name = $request->input('name');
-        $transaction->date_transaction = $request->input('date');
-        $transaction->amount = $request->input('amount');
-        
-        $category=Category::find($request->input('category'));
-        $category->transactions()->save($transaction);
-        
-        $transaction->save();
+        // var_dump($request);exit;
+        $addCategory = new Category;
+        $addCategory->name = $request->input('name');
+        $addCategory->icon = $request->input('icon');
 
-        return Redirect::route('transactionList') -> with ('success' , 'Transaction enregistré avec succès'); // Redirect::route('') == HEADER:LOCATION 
+        $addCategory->save();
+
+        return Redirect::route('categoryList') -> with ('success' , 'Catégorie enregistré avec succès');
     }
 
     /**
