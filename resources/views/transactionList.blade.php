@@ -48,7 +48,7 @@
                             </span>
                         </td>
                         <td class="text-end text-nowrap">
-                            <a href="#" class="btn btn-outline-primary btn-sm rounded-circle">
+                            <a href="{{ @route ('transactionEdit', ['id' => $transaction->id]) }}" class="btn btn-outline-primary btn-sm rounded-circle">
                                 <i class="bi bi-pencil"></i>
                             </a>
                             <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">

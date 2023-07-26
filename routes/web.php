@@ -23,5 +23,7 @@ use App\Http\Controllers\CategoryController;
 Route::get('trans/list', [TransactionController::class, 'index'])->name('transactionList');
 Route::get('trans/add', [TransactionController::class, 'create'])->name('transactionAdd');
 Route::post('trans/add', [TransactionController::class, 'store'])->name('transactionStore');
+Route::get('trans/edit/{id}', [TransactionController::class, 'edit'])->name('transactionEdit');
+Route::put('trans/update/{id}', [TransactionController::class, 'update'])->name('transactionUpdate');
 Route::get('cat/list', [CategoryController::class, 'index'])->name('categoryList');
 Route::post('cat/add', [CategoryController::class, 'store'])->name('categoryStore');

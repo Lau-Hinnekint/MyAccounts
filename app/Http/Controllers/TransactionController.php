@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Category;
 
+
 class TransactionController extends Controller
 {
     /**
@@ -77,7 +78,11 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'categories' => Category::all(),
+            'id' => $id
+        ];
+        return view ('transactionEdit', $data);
     }
 
     /**
@@ -89,7 +94,17 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // var_dump($request);exit;
+
+        $update = Transaction::find($id);
+        $update->name = $request->input('name');
+        $update->date_transaction = $request->input('date');
+        $update->amount = $request->input('amount');
+        $update->category_id = $request->input('category');
+
+        $update->save();
+
+        return Redirect::route('transactionList') -> with ('success' , 'Transaction modifé avec succès');
     }
 
     /**
