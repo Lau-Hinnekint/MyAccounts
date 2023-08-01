@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Transaction;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Transaction;
 use App\Models\Category;
 
 
@@ -18,10 +18,11 @@ class TransactionController extends Controller
     public function index()
     {
         $data = [
+            'total' => Transaction::sum('amount'),
             'transactions'=> Transaction::where('date_transaction', 'LIKE', '2023-07%')
             ->orderByDesc ('date_transaction')
             ->get(),
-            'total' => Transaction::sum('amount')
+            
         ]; 
         
         return view ('transactionList', $data);
@@ -80,10 +81,13 @@ class TransactionController extends Controller
     {
         $data = [
             'categories' => Category::all(),
-            'id' => $id
+            'id' => $id,
+            'oldValue' => Transaction::find($id),
         ];
-        return view ('transactionEdit', $data);
+
+        return view ('transactionEdit', $data);        
     }
+        
 
     /**
      * Update the specified resource in storage.
@@ -94,7 +98,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // var_dump($request);exit;
+        // var_dump($);exit;
 
         $update = Transaction::find($id);
         $update->name = $request->input('name');
@@ -114,7 +118,9 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        Transaction::find($id)->delete();
+
+        return Redirect::route('transactionList') -> with ('success' , 'Transaction supprimé avec succès');        
     }
 }

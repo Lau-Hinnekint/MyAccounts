@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                     @if (session ('success'))
-                        <p class="text-center"><button class="btn btn-primary rounded-pill px-3" type="button" text-align-center>{{ session ('success') }}</button></p>
+                    <p class="text-center"><button class="btn btn-primary rounded-pill px-3" type="button" text-align-center>{{ session ('success') }}</button></p>
                     @endif
                     @foreach ($transactions as $transaction)
                     <tr>
@@ -51,9 +51,11 @@
                             <a href="{{ @route ('transactionEdit', ['id' => $transaction->id]) }}" class="btn btn-outline-primary btn-sm rounded-circle">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <a href="#" class="btn btn-outline-danger btn-sm rounded-circle">
-                                <i class="bi bi-trash"></i>
-                            </a>
+                            <form action="{{ @route ('transactionDestroy', ['id' => $transaction->id]) }}" method="post" class="btn btn-sm rounded-circle">
+                            @csrf
+                            @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger btn-sm rounded-circle"><i class="bi bi-trash"></i></button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

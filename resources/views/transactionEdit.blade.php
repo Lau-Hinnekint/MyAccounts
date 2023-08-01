@@ -13,16 +13,16 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label for="name" class="form-label">Nom de l'opération *</label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Facture d'électricité" required>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="{{ $oldValue->name }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Date *</label>
-                    <input type="date" class="form-control" name="date" id="date" required>
+                    <input type="date" class="form-control" name="date" id="date" value="{{ $oldValue->date_transaction }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="amount" class="form-label">Montant *</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="amount" id="amount" required>
+                        <input type="text" class="form-control" name="amount" id="amount" placeholder="{{ $oldValue->amount }}"required>
                         <span class="input-group-text">€</span>
                     </div>
                 </div>
@@ -30,10 +30,10 @@
                 <div class="mb-3">
                     <label for="category" class="form-label">Catégorie</label>
                     <select class="form-select" name="category" id="category">
-                        <option value="" selected>Aucune catégorie</option>
                         @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
+                        <option value="{{ $oldValue->category->id }}" selected>{{ $oldValue->category->name }}</option>
                     </select>
                 </div>
                 <div class="text-center">

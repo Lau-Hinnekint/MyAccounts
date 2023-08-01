@@ -25,5 +25,6 @@ Route::get('trans/add', [TransactionController::class, 'create'])->name('transac
 Route::post('trans/add', [TransactionController::class, 'store'])->name('transactionStore');
 Route::get('trans/edit/{id}', [TransactionController::class, 'edit'])->name('transactionEdit');
 Route::put('trans/update/{id}', [TransactionController::class, 'update'])->name('transactionUpdate');
+Route::delete('trans/delete/{id}', [TransactionController::class, 'destroy'])->name('transactionDestroy');
 Route::get('cat/list', [CategoryController::class, 'index'])->name('categoryList');
 Route::post('cat/add', [CategoryController::class, 'store'])->name('categoryStore');
