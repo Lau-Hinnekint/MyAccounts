@@ -43,9 +43,15 @@
                             {{$transaction->name}}
                         </td>
                         <td class="text-end">
+                            @if ($transaction->amount < 0)
                             <span class="rounded-pill text-nowrap bg-warning-subtle px-2">
                                 {{$transaction->amount}} €
                             </span>
+                            @else
+                            <span class="rounded-pill text-nowrap bg-success-subtle px-2">
+                                {{$transaction->amount}} €
+                            </span>
+                            @endif
                         </td>
                         <td class="text-end text-nowrap">
                             <a href="{{ @route ('transactionEdit', ['id' => $transaction->id]) }}" class="btn btn-outline-primary btn-sm rounded-circle">
@@ -54,7 +60,7 @@
                             <form action="{{ @route ('transactionDestroy', ['id' => $transaction->id]) }}" method="post" class="btn btn-sm rounded-circle">
                             @csrf
                             @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger btn-sm rounded-circle"><i class="bi bi-trash"></i></button>
+                                <button onclick="confirmDelete('{{ $transaction->id }}')" type="submit" class="btnDelete btn btn-outline-danger btn-sm rounded-circle"><i class="bi bi-trash"></i></button>
                             </form>
                         </td>
                     </tr>

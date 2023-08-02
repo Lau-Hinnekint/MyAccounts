@@ -98,13 +98,18 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // var_dump($);exit;
+        // var_dump($request);exit;
 
         $update = Transaction::find($id);
         $update->name = $request->input('name');
         $update->date_transaction = $request->input('date');
         $update->amount = $request->input('amount');
-        $update->category_id = $request->input('category');
+        // $update->category_id = $request->input('category');
+
+        $category=Category::find($request->input('category'));
+        $category->transactions()->save($update);
+
+        // var_dump($category);exit;
 
         $update->save();
 

@@ -30,10 +30,15 @@
                 <div class="mb-3">
                     <label for="category" class="form-label">Catégorie</label>
                     <select class="form-select" name="category" id="category">
+                        <!-- <option placeholder="{{ $oldValue->category->id }}" selected>{{ $oldValue->category->name }}</option> -->
                         @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @if ($category->name == $oldValue->category->name)
+                            <option value="{{ $oldValue->category->id }}" selected>{{ $oldValue->category->name }}</option>
+                            @else
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endif
                         @endforeach
-                        <option value="{{ $oldValue->category->id }}" selected>{{ $oldValue->category->name }}</option>
+                        
                     </select>
                 </div>
                 <div class="text-center">
